@@ -14,7 +14,7 @@ package "nginx" do
 end
 
 # setup the document root
-directory "/var/www/vhosts/default" do
+directory "/srv/myapp" do
 	owner "www-data"
 	group "www-data"
 	mode "0755"
@@ -24,7 +24,7 @@ end
 
 # drop a default index page in
 execute "default-index-page" do
-        command "echo '<?php phpinfo(); ?>' > /var/www/vhosts/default/index.php"
+        command "echo '<?php phpinfo(); ?>' > /srv/myapp/index.php"
         action :run
 end
 

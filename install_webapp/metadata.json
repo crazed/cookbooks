@@ -1,7 +1,7 @@
 {
     "suggestions": {
     },
-    "description": "Installs/Configures quick_start",
+    "description": "Installs/Configures install_webapp",
     "conflicting": {
     },
     "recipes": {
@@ -23,7 +23,7 @@
     "groupings": {
     },
     "license": "All rights reserved",
-    "name": "quick_start",
+    "name": "install_webapp",
     "recommendations": {
     }
   }
