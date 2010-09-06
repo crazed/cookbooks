@@ -11,13 +11,13 @@ package "git-core" do
 	action :install
 end
 
-directory "/srv/myapp/shared/config" do
+directory "/srv/#{node.default[:webapp][:name]}/shared" do
 	recursive true
 	action :create
 end
 
-deploy "/srv/myapp" do
-	repo "git://git.hackerna.me/myapp.git"
+deploy "/srv/#{node.default[:webapp][:name]}" do
+	repo node.default[:webapp][:repo]
 	branch "HEAD"
 	enable_submodules true
 	# remove rails specific stuff
