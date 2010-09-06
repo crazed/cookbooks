@@ -11,12 +11,12 @@ package "git-core" do
 	action :install
 end
 
-directory "/srv/#{node.default[:webapp][:name]}/shared" do
+directory "#{node.default[:webapp][:deploy]}/shared" do
 	recursive true
 	action :create
 end
 
-deploy "/srv/#{node.default[:webapp][:name]}" do
+deploy node.default[:webapp][:deploy] do
 	repo node.default[:webapp][:repo]
 	branch "HEAD"
 	enable_submodules true

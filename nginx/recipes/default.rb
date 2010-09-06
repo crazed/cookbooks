@@ -14,7 +14,7 @@ package "nginx" do
 end
 
 # setup the document root
-directory "/srv/myapp" do
+directory node.default[:nginx][:root] do
 	owner "www-data"
 	group "www-data"
 	mode "0755"
@@ -31,6 +31,11 @@ end
 # default nginx configuration
 template "/etc/nginx/sites-available/default" do
 	source "nginx-default.erb"
+	variables ({
+		:document_root => node.default[:nginx][:root],
+		:indexes => node.default[:nginx][:indexes],
+		:server_name => node.default[:nginx][:server_name]
+	})
 end
 
 # stop/disable apache2 (this is on by default from the ubuntu ami)
