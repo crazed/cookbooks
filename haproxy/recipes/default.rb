@@ -17,6 +17,26 @@
 # limitations under the License.
 #
 
+include_recipe "aws"
+aws = data_bag_item("aws", "main") # add error checking here!
+eip = data_bag_item("aws", "eip_load_balancer_prod") # add error checking here!
+
+# i'm keeping the production role for app servers in a data bag
+app_info = data_bag_item("my-awesome-company", "application")
+
+aws_elastic_ip "eip_load_balancer_prod" do
+	aws_access_key aws['aws_access_key_id']
+	aws_secret_access_key aws['aws_secret_access_key_id']
+	ip eip['public_ip']
+	action :associate
+end
+
+server_list = Array.new
+search(:node, "role:#{app_info['prod_role']}").each do |server|
+	Chef::Log.info("Found a server: #{server} IP: #{server.cloud.private_ips.first}")
+	server_list << server.cloud.private_ips.first
+end
+
 package "haproxy" do
   action :install
 end
@@ -38,5 +58,6 @@ template "/etc/haproxy/haproxy.cfg" do
   owner "root"
   group "root"
   mode 0644
-  notifies :restart, resources(:service => "haproxy")
+  variables(:servers => server_list)
+  notifies :reload, resources(:service => "haproxy")
 end
