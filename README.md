@@ -1,42 +1,35 @@
-This directory contains the cookbooks used to configure systems in your infrastructure with Chef.
+Cookbooks by crazed
 
-Configure knife to use your preferred copyright holder, email contact and license. Add the following lines to `~/chef-repo/.chef/knife.rb`.
+Here's some cookbooks I've written for Opscode Chef. I'll try to keep them updated, but patches/suggestions are always welcome. Also it should be noted I'm a sysadmin not a true developer ;)
 
-    cookbook_copyright "Example, Com."
-    cookbook_email     "cookbooks@example.com"
-    cookbook_license   "apachev2"
+zabbix
+* uses the zabbix api written for ruby 
+* creates a zabbix_agent resource/provider
 
-Supported values for `cookbook_license` are "apachev2" or "none". These settings are used to prefill comments in the default recipe, and the corresponding values in the metadata.rb. You are free to change these in those files.
+haproxy
+* assigns EIP from aws eip_load_balancer_prod databag
+* uses a databag similar to this for server configuration
+    $ knife data bag show my-awesome-company application
+    {
+      "repo": "git://git.hackerna.me/myapp.git",
+      "id": "application",
+      "revision": "HEAD",
+      "deploy": false,
+      "deploy_to": "/srv/myapp",
+      "prod_role": "myapp-server"
+    }
 
-Create new cookbooks in this directory with Knife.
+install_webapp
+* uses a data bag like the above for deployment info
+* will only deploy when "deploy" is set to true
 
-    knife cookbook create COOKBOOK
+ebs_mounter
+* creates as many EBS volumes as described in the attributes file
+* stripes the volumes with LVM
+* creates an XFS file system and mounts it 
 
-This will create all the cookbook directory components. You don't need to use them all, and can delete the ones you don't need. It also creates a README file, metadata.rb and default recipe.
+php-fpm
+* adds a PPA to install php-fpm on Ubuntu
 
-You can also download cookbooks directly from the Opscode Cookbook Site. There are two subcommands to help with this depending on what your preference is.
-
-The first and recommended method is to use a vendor branch if you're using Git. This is automatically handled with Knife.
-
-    knife cookbook site vendor COOKBOOK
-
-This will:
-
-* Download the cookbook tarball from cookbooks.opscode.com.
-* Ensure its on the git master branch.
-* Checks for an existing vendor branch, and creates if it doesn't.
-* Checks out the vendor branch (chef-vendor-COOKBOOK).
-* Removes the existing (old) version.
-* Untars the cookbook tarball it downloaded in the first step.
-* Adds the cookbook files to the git index and commits.
-* Creates a tag for the version downloaded.
-* Checks out the master branch again.
-* Merges the cookbook into master.
-
-The last step will ensure that any local changes or modifications you have made to the cookbook are preserved, so you can keep your changes through upstream updates.
-
-If you're not using Git, use the site download subcommand to download the tarball.
-
-    knife cookbook site download COOKBOOK
-
-This creates the COOKBOOK.tar.gz from in the current directory (e.g., `~/chef-repo`). We recommend following a workflow similar to the above for your version control tool.
+nginx
+* installs and configures nginx
