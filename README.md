@@ -13,15 +13,15 @@ haproxy
  * assigns EIP from aws eip_load_balancer_prod databag
  * uses a databag similar to this for server configuration
 
-    $ knife data bag show my-awesome-company application
-    {
-      "repo": "git://git.hackerna.me/myapp.git",
-      "id": "application",
-      "revision": "HEAD",
-      "deploy": false,
-      "deploy_to": "/srv/myapp",
-      "prod_role": "myapp-server"
-    }
+     $ knife data bag show my-awesome-company application
+     {
+       "repo": "git://git.hackerna.me/myapp.git",
+       "id": "application",
+       "revision": "HEAD",
+       "deploy": false,
+       "deploy_to": "/srv/myapp",
+       "prod_role": "myapp-server"
+     }
 
 install_webapp
 --------------
