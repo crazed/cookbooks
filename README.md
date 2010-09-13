@@ -26,7 +26,7 @@ haproxy
 install_webapp
 --------------
  * uses a data bag like the above for deployment info
- * will only deploy when "deploy" is set to true
+ * will only deploy when "deploy" is set to true or the node was just added
 
 ebs_mounter
 -----------
