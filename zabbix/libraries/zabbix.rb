@@ -7,7 +7,7 @@ end
 module Opscode
   module Zabbix
     module Agent
-      def create_host(server="",user="",pass="",host="",ip="",port=10050)
+      def create_host(server="",user="",pass="",host="",ip="",dns="",port=10050)
         zbx_api = ZbxAPI.new(server)
         zbx_api.login(user, pass)
         if zbx_api.loggedin? then
@@ -26,6 +26,7 @@ module Opscode
             "ip" => ip,
             "port" => port,
             "useip" => 1,
+            "dns" => dns,
             "groups" => [ { "groupid" => 2 }])
         end
       end

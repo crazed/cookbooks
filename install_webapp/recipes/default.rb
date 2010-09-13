@@ -7,24 +7,34 @@
 # All rights reserved - Do Not Redistribute
 #
 
+app_info = data_bag_item(node.default[:webapp][:bag], node.default[:webapp][:name])
+
+# check if this server already has app data
+unless File.directory?(app_info['deploy_to'])
+	new_server = true
+end
+
 package "git-core" do
 	action :install
 end
 
-directory "#{node.default[:webapp][:deploy]}/shared" do
+directory "#{app_info['deploy_to']}/shared" do
 	recursive true
 	action :create
 end
 
-deploy node.default[:webapp][:deploy] do
-	repo node.default[:webapp][:repo]
-	branch "HEAD"
-	enable_submodules true
-	# remove rails specific stuff
-	@purge_before_symlink = %w{}
-	@create_dirs_before_symlink  = %w{}
-	@symlinks = {}
-	@symlink_before_migrate = {}
-	migrate false
-	action :deploy
+if app_info['deploy'] || new_server
+	Chef::Log.info("Running a deployment..")
+	deploy app_info['deploy_to'] do
+		repo app_info['repo']
+		branch app_info['revision']
+		enable_submodules true
+		# remove rails specific stuff
+		@purge_before_symlink = %w{}
+		@create_dirs_before_symlink  = %w{}
+		@symlinks = {}
+		@symlink_before_migrate = {}
+		migrate false
+		action :deploy
+	end
 end

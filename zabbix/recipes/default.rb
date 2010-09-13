@@ -38,5 +38,6 @@ zabbix_agent "http://chef.hackerna.me/zabbix" do
   pass node.zabbix.pass
   host node.name
   ip node.cloud.public_ips.first
+  dns node.zabbix.fqdn
   action :monitor
 end
