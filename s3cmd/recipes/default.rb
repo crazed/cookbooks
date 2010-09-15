@@ -21,7 +21,7 @@ template "/etc/s3cfg.conf" do
   variables(:passphrase => aws_config['s3_passphrase'], 
     :aws_secret_access_key_id => aws_config['aws_secret_access_key_id'],
     :aws_access_key_id => aws_config['aws_access_key_id'])
-  user "root"
+  owner "root"
   group "root"
   mode 600
 end

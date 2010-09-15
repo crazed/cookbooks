@@ -23,7 +23,7 @@ end
 
 # setup the auth-client-config profile
 template "/etc/auth-client-config/profile.d/ldap-auth-config" do
-  user "root"
+  owner "root"
   group "root"
   mode "755"
   source "ldap-auth-config.erb"
@@ -31,24 +31,25 @@ end
 
 # setup ldap.conf for authentication
 template "/etc/ldap.conf" do
-  user "root"
+  owner "root"
   group "root"
   mode "755"
   cacert = '/etc/ldap/keys/cacert.pem'
-  variables(:base_dn => ldap_config['basedn'], :cacert => cacert, :uri => ldap_config['uri'])
+  variables(:base_dn => ldap_config['basedn'], :cacert => '/etc/ldap/keys/cacert.pem', :uri => ldap_config['uri'])
   source "ldap.conf.erb"
+end
+
+# grab the file (requires s3cmd recipe)
+execute "get_cacert" do  command "s3cmd -c /etc/s3cfg.conf get s3://#{ldap_config['cacert_bucket']}/#{ldap_config['cacert_path']} #{ldap_cert_dir}"
+  action :nothing
 end
 
 # make sure the ldap keys directory exists
 directory ldap_cert_dir do
-  user "openldap"
-  group "openldap"
+  owner "root"
+  group "root"
   action :create
-end
-
-# grab the file (requires s3cmd recipe)
-execute "get_cacert" do
-  command "s3cmd get s3://#{ldap_config['cacert_bucket']}/#{ldap_config['cacert_path']} #{ldap_cert_dir}"
+  notifies :run, resources(:execute => "get_cacert")
 end
 
 # enable ldap auth
