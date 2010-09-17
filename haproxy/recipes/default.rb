@@ -36,6 +36,9 @@ search(:node, "role:#{app_info['prod_role']}").each do |server|
 	Chef::Log.info("Found a server: #{server} IP: #{server.cloud.private_ips.first}")
 	server_list << server.cloud.private_ips.first
 end
+# uniq and sort the array to make sure things are the same each time a search is made
+server_list.sort!
+server_list.uniq!
 
 package "haproxy" do
   action :install
