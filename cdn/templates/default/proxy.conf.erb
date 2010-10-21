@@ -1,0 +1,37 @@
+upstream origin {
+        server <%= @origin %>;
+}
+server {
+        listen   	81;
+        server_name  	localhost;
+        root 		/var/www;
+
+        location @static {
+                internal;
+                proxy_set_header X-Real-IP 		$remote_addr;
+                proxy_set_header X-Forwarded-For 	$proxy_add_x_forwarded_for;
+                proxy_set_header Host 			$host;
+                proxy_pass 				http://origin;
+                proxy_store 				on;
+                proxy_store_access 			user:rw group:rw all:r;
+        }
+
+        location @dynamic {
+                internal;
+                proxy_set_header X-Real-IP 		$remote_addr;
+                proxy_set_header X-Forwarded-For 	$proxy_add_x_forwarded_for;
+                proxy_set_header Host 			$host;
+                proxy_pass 				http://origin;
+        }
+
+        location ~* \.(gif|jpg|jpeg|png|wmv|avi|mpg|mpeg|mp4|htm|html|js|css|mp3|swf|ico|flv)$ {
+                error_page 404 = @static;
+        }
+
+        location / {
+                error_page 404 = @dynamic;
+                error_page 403 = @dynamic;
+        }
+
+}
+
