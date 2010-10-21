@@ -1,29 +1,43 @@
 {
     "suggestions": {
     },
-    "description": "Installs/Configures a CDN server using varnish and nginx",
+    "description": "Installs/Configures cdn",
     "conflicting": {
     },
     "recipes": {
     },
     "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n",
     "attributes": {
+      "origin": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "default": "origin.example.com",
+        "type": "string",
+        "recipes": [
+
+        ],
+        "display_name": "Cache Origin Server",
+        "description": "The FQDN of your origin server"
+      }
     },
     "providing": {
     },
     "dependencies": {
     },
-    "maintainer": "YOUR_COMPANY_NAME",
+    "maintainer": "Datapipe",
     "replacing": {
     },
     "platforms": {
     },
-    "maintainer_email": "YOUR_EMAIL",
+    "maintainer_email": "afeid@datapipe.com",
     "version": "0.0.1",
     "groupings": {
     },
     "license": "All rights reserved",
-    "name": "zabbix",
+    "name": "cdn",
     "recommendations": {
     }
   }
