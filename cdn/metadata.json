@@ -14,7 +14,6 @@
         "choice": [
 
         ],
-        "default": "origin.example.com",
         "type": "string",
         "recipes": [
 

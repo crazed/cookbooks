@@ -8,5 +8,4 @@ attribute	'origin',
   :display_name => "Cache Origin Server",
   :description => "The FQDN of your origin server",
   :type => "string",
-  :required => "required",
-  :default => "origin.example.com"
+  :required => "required"
