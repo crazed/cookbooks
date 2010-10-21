@@ -1,0 +1,29 @@
+{
+    "suggestions": {
+    },
+    "description": "Installs/Configures a CDN server using varnish and nginx",
+    "conflicting": {
+    },
+    "recipes": {
+    },
+    "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n",
+    "attributes": {
+    },
+    "providing": {
+    },
+    "dependencies": {
+    },
+    "maintainer": "YOUR_COMPANY_NAME",
+    "replacing": {
+    },
+    "platforms": {
+    },
+    "maintainer_email": "YOUR_EMAIL",
+    "version": "0.0.1",
+    "groupings": {
+    },
+    "license": "All rights reserved",
+    "name": "zabbix",
+    "recommendations": {
+    }
+  }
