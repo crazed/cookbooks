@@ -14,6 +14,6 @@ bash 'install drush' do
   wget http://ftp.drupal.org/files/projects/drush-All-versions-4.2.tar.gz
   tar xzf drush-All-versions-4.2.tar.gz
   mv drush /usr/local/share
-  ln -s /usr/local/share/drush.php /usr/local/bin/drush
+  ln -s /usr/local/share/drush/drush.php /usr/local/bin/drush
   EOH
 end
