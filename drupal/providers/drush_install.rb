@@ -14,7 +14,7 @@ action :run do
 
   execute 'drush install' do
     creates "#{new_resource.dir}/sites/default/settings.php"
-    command "drush -r #{new_resource.dir} site-install --db-url=mysql://#{new_resource.mysql_user}:#{new_resource.mysql_password}@#{new_resource.mysql_hostname}/#{new_resource.mysql_database}"
+    command "drush -r #{new_resource.dir} -y site-install --db-url=mysql://#{new_resource.mysql_user}:#{new_resource.mysql_password}@#{new_resource.mysql_hostname}/#{new_resource.mysql_database}"
   end
 
   execute 'files dir permissions' do
