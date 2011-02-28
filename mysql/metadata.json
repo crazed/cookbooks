@@ -1,0 +1,128 @@
+{
+    "replacing": {
+    },
+    "maintainer_email": "afeid@datapipe.com",
+    "description": "Installs/Configures mysql",
+    "groupings": {
+    },
+    "recommendations": {
+    },
+    "recipes": {
+      "mysql::run_s3_import": "Imports MySQL dump from an S3 bucket",
+      "mysql::default": "Installs mysql-server",
+      "mysql::backup": "Installs a nightly cronjob that performs database dumps to an S3 bucket",
+      "mysql::new_database": "Configures a new database"
+    },
+    "attributes": {
+      "mysql/database": {
+        "required": "optional",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "default": "user_db",
+        "type": "string",
+        "recipes": [
+          "mysql::new_database"
+        ],
+        "display_name": "MySQL User Database",
+        "description": "New database that will a new user will have full access to."
+      },
+      "mysql/password": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "mysql::new_database"
+        ],
+        "display_name": "MySQL User Password",
+        "description": "The password for a regular MySQL user."
+      },
+      "mysql/dumps_bucket_path": {
+        "required": "optional",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "default": "/",
+        "type": "string",
+        "recipes": [
+          "mysql::backup"
+        ],
+        "display_name": "MySQL Dumps S3 Path",
+        "description": "The path relative to your s3 bucket to store dumps"
+      },
+      "mysql/rootpw": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "mysql::default"
+        ],
+        "display_name": "MySQL Root Password"
+      },
+      "mysql/dumps_bucket": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "mysql::backup",
+          "mysql::run_s3_import"
+        ],
+        "display_name": "MySQL Dumps S3 Bucket",
+        "description": "S3 bucket to place mysql dumps in"
+      },
+      "mysql/dumps_bucket_file": {
+        "required": "optional",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "default": "/latest.sql",
+        "type": "string",
+        "recipes": [
+          "mysql::run_s3_import"
+        ],
+        "display_name": "MySQL S3 File Path",
+        "description": "Dump file path to import"
+      },
+      "mysql/user": {
+        "required": "optional",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "default": "user",
+        "type": "string",
+        "recipes": [
+          "mysql::new_database"
+        ],
+        "display_name": "MySQL User",
+        "description": "A regular mysql user, used typically for application level database access."
+      }
+    },
+    "suggestions": {
+    },
+    "dependencies": {
+    },
+    "conflicting": {
+    },
+    "platforms": {
+    },
+    "version": "0.0.1",
+    "license": "All rights reserved",
+    "long_description": "= DESCRIPTION:\nThis will install MySQL and set the root password. This also creates /root/.my.cnf with proper credentials to allow easy command line access to MySQL.\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\nmysql.rootpw, this is the root password to set\n\n= USAGE:\n\n",
+    "name": "mysql",
+    "providing": {
+    },
+    "maintainer": "Datapipe"
+  }

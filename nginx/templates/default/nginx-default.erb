@@ -3,16 +3,16 @@ server {
         server_name <%= @server_name %>;
 
         root   <%= @document_root %>;
-        index  <%= @indexes %>;
+        index  index.php index.html;
 
         location = /50x.html {
                 root   /var/www/nginx-default;
         }
 
-        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        # pass the PHP scripts to php-fpm 
         #
         location ~ \.php$ {
-                fastcgi_pass   127.0.0.1:9000;
+                fastcgi_pass   unix:/var/run/php5-fpm.sock;
                 fastcgi_index  index.php;
                 fastcgi_param  SCRIPT_FILENAME  $document_root/$fastcgi_script_name;
                 include        fastcgi_params;

@@ -1,0 +1,30 @@
+{
+    "replacing": {
+    },
+    "maintainer_email": "cloud@datapipe.com",
+    "description": "Installs/Configures easyagent",
+    "groupings": {
+    },
+    "recommendations": {
+    },
+    "recipes": {
+      "easyagent::install": "installs easyagent"
+    },
+    "attributes": {
+    },
+    "suggestions": {
+    },
+    "dependencies": {
+    },
+    "conflicting": {
+    },
+    "platforms": {
+    },
+    "version": "0.0.1",
+    "license": "All rights reserved",
+    "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n",
+    "name": "easyagent",
+    "providing": {
+    },
+    "maintainer": "Datapipe"
+  }

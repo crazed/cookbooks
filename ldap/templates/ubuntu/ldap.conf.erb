@@ -1,0 +1,9 @@
+binddn <%= @bind_dn %>
+bindpw <%= @bind_pw %>
+base <%= @base_dn %>
+uri <%= @uri %>
+ldap_version 3
+pam_password md5
+ssl start_tls
+tls_cacertfile <%= @cacert %>
+sudoers_base ou=sudoers,<%= @base_dn %>

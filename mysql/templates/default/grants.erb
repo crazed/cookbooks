@@ -1,0 +1,4 @@
+create user '<%= @user %>'@'localhost' identified by '<%= @pass %>';
+create database <%= @database %>;
+grant all privileges on <%= @database %>.* to '<%= @user %>'@'localhost';
+flush privileges;

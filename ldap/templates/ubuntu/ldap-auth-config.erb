@@ -1,0 +1,17 @@
+[lac_ldap]
+nss_passwd=passwd: files ldap
+nss_group=group: files ldap
+nss_shadow=shadow: files ldap
+nss_netgroup=netgroup: nis
+nss_sudoers=sudoers: files ldap
+pam_account=account     sufficient      pam_ldap.so
+        account         required        pam_unix.so
+pam_auth=auth           required        pam_group.so use_first_pass
+        auth            sufficient      pam_ldap.so
+        auth            required        pam_unix.so nullok_secure use_first_pass
+pam_password=password   sufficient      pam_ldap.so
+        password        required        pam_unix.so nullok obscure min=4 max=8 md5
+pam_session=session required                        pam_mkhomedir.so skel=/etc/skel/ umask=0022
+  session         sufficient      pam_ldap.so
+        session         required        pam_unix.so
+

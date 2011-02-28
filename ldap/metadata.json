@@ -1,0 +1,97 @@
+{
+    "replacing": {
+    },
+    "maintainer_email": "afeid@datapipe.com",
+    "description": "Installs/Configures ldap",
+    "groupings": {
+    },
+    "recommendations": {
+    },
+    "recipes": {
+      "ldap::sudoers": "configures an instance to use LDAP for sudoers",
+      "ldap::auth": "configures an instance for LDAP authentication",
+      "ldap::sshd": "Configures sshd to allow password logins"
+    },
+    "attributes": {
+      "ldap/bind_pw": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "ldap::auth"
+        ],
+        "display_name": "LDAP Bind Password",
+        "description": "The password for the bind DN"
+      },
+      "ldap/cacert_url": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "ldap::auth"
+        ],
+        "display_name": "LDAP CA Cert URL",
+        "description": "The URL which has the CA Certificate for LDAP servers"
+      },
+      "ldap/uri": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "ldap::auth"
+        ],
+        "display_name": "LDAP Server URIs",
+        "description": "Space delimited list of ldap servers with their URI, ex: ldap://ldap1.example.com"
+      },
+      "ldap/bind_dn": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "ldap::auth"
+        ],
+        "display_name": "LDAP Bind DN",
+        "description": "The DN to bind as for lookups in LDAP"
+      },
+      "ldap/base_dn": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "ldap::auth"
+        ],
+        "display_name": "LDAP Base DN",
+        "description": "The base DN for LDAP lookups"
+      }
+    },
+    "suggestions": {
+    },
+    "dependencies": {
+    },
+    "conflicting": {
+    },
+    "platforms": {
+    },
+    "version": "0.0.1",
+    "license": "All rights reserved",
+    "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n",
+    "name": "ldap",
+    "providing": {
+    },
+    "maintainer": "Datapipe"
+  }

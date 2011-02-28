@@ -1,0 +1,17 @@
+#!/bin/bash
+
+dump_dir=/dumps
+tstamp=`date +%Y%m%d.%H%m%S`
+retain=7
+for db in `echo "show databases" | mysql | egrep -v '^Database$|^information_schema$'`; do
+  mysqldump $db | gzip > $dump_dir/$db-$tstamp.sql.gz
+done
+
+# create a full dump to use when booting new instance
+mysqldump --all-databases | gzip > $dump_dir/latest.sql.gz
+
+# remove old dumps
+find $dump_dir -name "*.sql.gz" -a -mtime +$retain -exec rm {} \;
+
+# sync up to s3
+/usr/bin/s3cmd sync --delete-removed $dump_dir/ s3://<%= @s3_bucket %><%= @s3_path %>/

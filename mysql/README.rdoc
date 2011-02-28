@@ -1,0 +1,10 @@
+= DESCRIPTION:
+This will install MySQL and set the root password. This also creates /root/.my.cnf with proper credentials to allow easy command line access to MySQL.
+
+= REQUIREMENTS:
+
+= ATTRIBUTES:
+mysql.rootpw, this is the root password to set
+
+= USAGE:
+

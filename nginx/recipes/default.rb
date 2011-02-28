@@ -1,51 +1,55 @@
 #
-# Cookbook Name:: nginx-web-stack
+# Cookbook Name:: nginx
 # Recipe:: default
 #
-# Copyright 2010, YOUR_COMPANY_NAME
+# Copyright 2010, Datapipe
 #
 # All rights reserved - Do Not Redistribute
 #
 
-
 # start off with nginx
-package "nginx" do
-	action :install
-end
+package "nginx"
 
 # setup the document root
-directory node.default[:nginx][:root] do
-	owner "www-data"
-	group "www-data"
-	mode "0755"
-	recursive true
-	action :create
-end
-
-# drop a default index page in
-execute "default-index-page" do
-        command "echo '<?php phpinfo(); ?>' > /srv/myapp/index.php"
-        action :run
+directory node.www.document_root do
+  owner "www-data"
+  group "www-data"
+  mode "0755"
+  recursive true
+  action :create
 end
 
 # default nginx configuration
 template "/etc/nginx/sites-available/default" do
-	source "nginx-default.erb"
-	variables ({
-		:document_root => node.default[:nginx][:root],
-		:indexes => node.default[:nginx][:indexes],
-		:server_name => node.default[:nginx][:server_name]
-	})
+  source "nginx-default.erb"
+  variables(
+    :document_root => node.www.document_root,
+    :server_name => node.nginx.server_name
+  )
 end
 
-# stop/disable apache2 (this is on by default from the ubuntu ami)
+# nginx.conf, set the processes to total cpu cores
+template "/etc/nginx/nginx.conf" do
+  source "nginx.conf.erb"
+  variables(:processes => node.cpu.total)
+end
+
+# kill apache2 if it's there
 service "apache2" do
-	supports :status => true, :restart => true
-	action [ :disable, :stop ]
+  only_if "pgrep apache2"
+  action [ :disable, :stop ]
 end
 
 # start up nginx
 service "nginx" do
-	supports :status => true, :restart => true
-	action [ :enable, :start ]
+  supports :status => true, :restart => true
+  action [ :enable, :start ]
+end
+
+# fix some log rotation
+remote_file '/etc/logrotate.d/nginx' do
+  source 'nginx-logrotate'
+  owner 'root'
+  group 'root'
+  mode '644'
 end

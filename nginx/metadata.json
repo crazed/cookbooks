@@ -1,29 +1,130 @@
 {
-    "suggestions": {
+    "replacing": {
     },
+    "maintainer_email": "afeid@datapipe.com",
     "description": "Installs/Configures nginx-web-stack",
-    "conflicting": {
+    "groupings": {
+    },
+    "recommendations": {
     },
     "recipes": {
+      "nginx::proxy": "Installs and configures Nginx for use with a proxy",
+      "nginx::ssl_termination": "Installs and configures Nginx for SSL termination with HAproxy",
+      "nginx::maintenance": "A basic script for enabling a maintenance page",
+      "nginx::default": "Installs and configured nginx"
     },
-    "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n",
     "attributes": {
+      "nginx/maintenance_html": {
+        "required": "optional",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "default": "<h1>Currently Unavailable</h1><p>Site is under maintenance, please try again later.</p>",
+        "type": "string",
+        "recipes": [
+          "nginx::maintenance"
+        ],
+        "display_name": "Nginx Maintenance HTML",
+        "description": "HTML content to display when maintenance is active"
+      },
+      "nginx/ssl_cert": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "nginx::ssl_termination"
+        ],
+        "display_name": "SSL Certificate",
+        "description": "PEM based SSL certificate data"
+      },
+      "nginx/proxy": {
+        "required": "optional",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "default": "localhost:81",
+        "type": "string",
+        "recipes": [
+          "nginx::proxy"
+        ],
+        "display_name": "Nginx Proxy Location",
+        "description": "The server nginx should proxy to"
+      },
+      "nginx/ssl_key": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "nginx::ssl_termination"
+        ],
+        "display_name": "SSL Key",
+        "description": "PEM based SSL private key data"
+      },
+      "nginx/load_balancer": {
+        "required": "optional",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "default": "localhost:85",
+        "type": "string",
+        "recipes": [
+          "nginx::ssl_termination"
+        ],
+        "display_name": "Load Balancer URI",
+        "description": "The load balancer URI, ex: localhost:85"
+      },
+      "www/document_root": {
+        "required": "optional",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "default": "/srv/http",
+        "type": "string",
+        "recipes": [
+          "nginx::proxy",
+          "nginx::ssl_termination",
+          "nginx::default"
+        ],
+        "display_name": "Nginx Document Root",
+        "description": "The documentroot for nginx"
+      },
+      "nginx/server_name": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "nginx::default"
+        ],
+        "display_name": "Nginx Server Name",
+        "description": "The FQDN of your website"
+      }
     },
-    "providing": {
+    "suggestions": {
     },
     "dependencies": {
     },
-    "maintainer": "YOUR_COMPANY_NAME",
-    "replacing": {
+    "conflicting": {
     },
     "platforms": {
     },
-    "maintainer_email": "YOUR_EMAIL",
     "version": "0.0.1",
-    "groupings": {
-    },
     "license": "All rights reserved",
+    "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n",
     "name": "nginx",
-    "recommendations": {
-    }
+    "providing": {
+    },
+    "maintainer": "Datapipe"
   }

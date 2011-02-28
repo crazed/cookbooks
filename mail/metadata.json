@@ -1,0 +1,83 @@
+{
+    "replacing": {
+    },
+    "maintainer_email": "afeid@datapipe.com",
+    "description": "Installs/Configures mail",
+    "groupings": {
+    },
+    "recommendations": {
+    },
+    "recipes": {
+      "mail::postfix_relay": "configures postfix to relay to an outside server"
+    },
+    "attributes": {
+      "mail/sasl_user": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "mail::postfix_relay"
+        ],
+        "display_name": "SMTP Relay Username",
+        "description": "The username to be used for your SMTP relay"
+      },
+      "mail/relay_server": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "mail::postfix_relay"
+        ],
+        "display_name": "SMTP Relay Server",
+        "description": "The smtp relay server to use"
+      },
+      "mail/relay_port": {
+        "required": "optional",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "default": "587",
+        "type": "string",
+        "recipes": [
+          "mail::postfix_relay"
+        ],
+        "display_name": "SMTP Relay Port",
+        "description": "The port on which your relay server runs"
+      },
+      "mail/sasl_password": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "mail::postfix_relay"
+        ],
+        "display_name": "SMTP Relay Password",
+        "description": "The password for your SMTP relay"
+      }
+    },
+    "suggestions": {
+    },
+    "dependencies": {
+    },
+    "conflicting": {
+    },
+    "platforms": {
+    },
+    "version": "0.0.1",
+    "license": "All rights reserved",
+    "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n",
+    "name": "mail",
+    "providing": {
+    },
+    "maintainer": "Datapipe"
+  }

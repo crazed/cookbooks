@@ -1,29 +1,98 @@
 {
-    "suggestions": {
-    },
-    "description": "Installs/Configures s3cmd",
-    "conflicting": {
-    },
-    "recipes": {
-    },
-    "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n",
-    "attributes": {
-    },
     "providing": {
     },
-    "dependencies": {
-    },
-    "maintainer": "YOUR_COMPANY_NAME",
+    "license": "All rights reserved",
+    "maintainer": "Datapipe",
     "replacing": {
+    },
+    "maintainer_email": "afeid@datapipe.com",
+    "groupings": {
+    },
+    "description": "Installs/Configures s3cmd",
+    "recommendations": {
     },
     "platforms": {
     },
-    "maintainer_email": "YOUR_EMAIL",
-    "version": "0.0.1",
-    "groupings": {
+    "attributes": {
+      "s3_bucket": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "s3cmd::sync",
+          "s3cmd::pull"
+        ],
+        "description": "Path in an s3 bucket to pull data from",
+        "display_name": "S3 Bucket Path"
+      },
+      "aws_secret_key": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "s3cmd::default"
+        ],
+        "description": "Your AWS Secret Key",
+        "display_name": "AWS Secret Key"
+      },
+      "sync_minutes": {
+        "required": "recommended",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "default": "15",
+        "type": "string",
+        "recipes": [
+          "s3cmd::sync"
+        ],
+        "display_name": "Sync Every X Minutes"
+      },
+      "aws_access_key": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "s3cmd::default"
+        ],
+        "description": "Your AWS access key",
+        "display_name": "AWS Access Key"
+      },
+      "code_path": {
+        "required": "required",
+        "calculated": false,
+        "choice": [
+
+        ],
+        "type": "string",
+        "recipes": [
+          "s3cmd::sync",
+          "s3cmd::pull"
+        ],
+        "display_name": "Document Root"
+      }
     },
-    "license": "All rights reserved",
+    "suggestions": {
+    },
+    "dependencies": {
+    },
+    "version": "0.0.1",
+    "recipes": {
+      "s3cmd::sync": "Syncs an s3 bucket path to a specific directory",
+      "s3cmd::pull": "Pulls down data from an s3 bucket to a specific directory",
+      "s3cmd::default": "Installs and configures s3cmd"
+    },
     "name": "s3cmd",
-    "recommendations": {
-    }
+    "conflicting": {
+    },
+    "long_description": ""
   }
