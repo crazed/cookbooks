@@ -11,7 +11,7 @@ deploy node.deploy.dir do
   @purge_before_symlink = %w{}
   @create_dirs_before_symlink = %w{}
   @symlinks = {}
-  @symlinks_before_migrate = {}
+  @symlink_before_migrate = {}
   migrate false
   action :deploy
 end
