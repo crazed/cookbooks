@@ -18,7 +18,7 @@ action :run do
   end
 
   execute 'drush enable modules' do
-    command "drush -r #{new_resource.dir} -y pm-enable #{new_resources.modules.join(' ')}"
+    command "drush -r #{new_resource.dir} -y pm-enable #{new_resource.modules.join(' ')}"
   end
 
   execute 'files dir permissions' do
