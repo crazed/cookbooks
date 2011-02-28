@@ -1,3 +1,4 @@
+include_recipe 'mysql::default'
 execute "mysql grants" do
   command "mysql -u root < /tmp/grants.sql && rm -f /tmp/grants.sql"
   action :nothing
