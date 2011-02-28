@@ -17,3 +17,13 @@ bash 'install drush' do
   ln -s /usr/local/share/drush/drush.php /usr/local/bin/drush
   EOH
 end
+
+bash 'install dush make' do
+  creates '/usr/local/share/drush/commands/drush_make'
+  cwd '/tmp'
+  code <<-EOH
+  wget http://ftp.drupal.org/files/projects/drush_make-6.x-2.0.tar.gz
+  tar xzf drush_make-6.x-2.0.tar.gz
+  mv drush_make /usr/local/share/drush/commands/
+  EOH
+end
