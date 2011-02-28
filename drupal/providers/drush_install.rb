@@ -17,6 +17,10 @@ action :run do
     command "drush -r #{new_resource.dir} -y site-install --db-url=mysql://#{new_resource.mysql_user}:#{new_resource.mysql_password}@#{new_resource.mysql_hostname}/#{new_resource.mysql_database}"
   end
 
+  execute 'drush enable modules' do
+    command "drush -r #{new_resource.dir} -y pm-enable #{new_resources.modules.join(' ')}"
+  end
+
   execute 'files dir permissions' do
     command "chown -R www-data:www-data #{new_resource.dir}/sites/default/files"
   end
