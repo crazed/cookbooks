@@ -3,6 +3,7 @@ action :run do
     source 'drush.make.erb'
     variables(
       :projects => new_resource.modules
+      :core => new_resource.core
     )
   end
 
