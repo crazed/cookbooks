@@ -1,4 +1,4 @@
-action :install do
+action :run do
   template '/tmp/drush.make' do
     source 'drush.make.erb'
     variables(
