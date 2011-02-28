@@ -6,5 +6,6 @@ drupal_drush_install node.www.document_root do
   mysql_user node.mysql.user
   mysql_password node.mysql.password
   mysql_hostname node.mysql.hostname
+  mysql_database node.mysql.database
   action :run
 end
