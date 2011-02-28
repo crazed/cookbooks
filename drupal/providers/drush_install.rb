@@ -2,7 +2,7 @@ action :run do
   template '/tmp/drush.make' do
     source 'drush.make.erb'
     variables(
-      :projects => new_resource.modules
+      :projects => new_resource.modules,
       :core => new_resource.core
     )
   end
