@@ -1,0 +1,6 @@
+core = <%= @core %>
+api = 2
+projects[] = drupal
+<% @projects.each do |project| %>
+projects[] = <%= project %>
+<% end %>
