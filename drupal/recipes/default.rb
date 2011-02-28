@@ -8,7 +8,7 @@
 #
 
 bash 'install drush' do
-  create '/usr/local/bin/drush'
+  creates '/usr/local/bin/drush'
   cwd '/tmp'
   code <<-EOH
   wget http://ftp.drupal.org/files/projects/drush-All-versions-4.2.tar.gz
