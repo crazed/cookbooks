@@ -1,6 +1,6 @@
 core = <%= @core %>
 api = 2
-projects[] = drupal
+projects[drupal][type] = "core"
 <% @projects.each do |project| %>
-projects[] = <%= project %>
+projects[<%= project %>][subdir] = "contrib"
 <% end %>
