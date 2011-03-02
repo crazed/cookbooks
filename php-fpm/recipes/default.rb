@@ -45,11 +45,13 @@ tuning['c1.xlarge']['max_children'] = 68
 tuning['c1.xlarge']['min_spare'] = 6
 tuning['c1.xlarge']['max_spare'] = 12
 
-# setup a command to add new ppa
-package "python-software-properties"
-execute "add-apt-repository" do
-        command "add-apt-repository ppa:brianmercer/php && apt-get update"
-        action :run
+if node.platform_version == '10.04'
+  # setup a command to add new ppa
+  package "python-software-properties"
+  execute "add-apt-repository" do
+          command "add-apt-repository ppa:brianmercer/php && apt-get update"
+          action :run
+  end
 end
 
 # take care of all the php packages
